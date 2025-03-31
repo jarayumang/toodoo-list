@@ -9,12 +9,25 @@ interface Category {
   name: string;
 }
 
+interface TaskData {
+  name: string;
+  description: string;
+  completed: boolean;
+  priority: string;
+  category: string | null;
+  due_date: string;
+  completed_date: string | null;
+  subtasks: null;
+}
+
 export default function NewTask() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [dueDate, setDueDate] = useState<string>("");
   const [taskTitle, setTaskTitle] = useState<string>("");
   const [taskDescription, setTaskDescription] = useState<string>("");
   const [priority, setPriority] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -30,14 +43,15 @@ export default function NewTask() {
     loadCategories();
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const taskData = {
+
+    const taskData: TaskData = {
       name: taskTitle,
       description: taskDescription,
       completed: false,
       priority: priority,
-      category: categories[0]?.id,
+      category: selectedCategory,
       due_date: dueDate,
       completed_date: null,
       subtasks: null,
@@ -62,6 +76,7 @@ export default function NewTask() {
           value={taskTitle}
           onChange={(e) => setTaskTitle(e.target.value)}
           className="border border-gray-300 rounded px-4 py-2"
+          required
         />
         <textarea
           placeholder="Task Description"
@@ -69,11 +84,13 @@ export default function NewTask() {
           onChange={(e) => setTaskDescription(e.target.value)}
           className="border border-gray-300 rounded px-4 py-2"
           rows={4}
+          required
         />
         <select
           className="border border-gray-300 rounded px-4 py-2"
           value={priority}
           onChange={(e) => setPriority(e.target.value)}
+          required
         >
           <option value="" disabled>
             Select Priority
@@ -84,7 +101,9 @@ export default function NewTask() {
         </select>
         <select
           className="border border-gray-300 rounded px-4 py-2"
-          defaultValue=""
+          value={selectedCategory ?? ""}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          required
         >
           <option value="" disabled>
             Select Category
@@ -100,6 +119,7 @@ export default function NewTask() {
           value={dueDate}
           onChange={(e) => setDueDate(e.target.value)}
           className="border border-gray-300 rounded px-4 py-2"
+          required
         />
         <button
           type="submit"

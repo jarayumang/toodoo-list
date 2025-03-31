@@ -37,8 +37,16 @@ export const fetchCategories = async () => {
   }
 };
 
+type PostTaskData = {
+  name: string;
+  description: string;
+  completed: boolean;
+  completed_date: string | null;
+  due_date: string | null;
+  priority: string;
+}
 // Post a new task
-export const postTask = async (taskData: Record<string, any>) => {
+export const postTask = async (taskData: PostTaskData ) => {
   try {
     console.log(taskData)
     const res = await fetch(`${API_BASE_URL}/tasks/`, {
@@ -61,7 +69,17 @@ export const postTask = async (taskData: Record<string, any>) => {
 };
 
 // Patch an existing task
-export const patchTask = async (id: number, taskData: Record<string, any>) => {
+type PatchTaskData = {
+  name?: string;
+  description?: string;
+  completed?: boolean;
+  created_date?: string;
+  completed_date?: string;
+  due_date?: string | null;
+  priority?: string;
+};
+
+export const patchTask = async (id: number, taskData: PatchTaskData) => {
   try {
     const res = await fetch(`${API_BASE_URL}/tasks/${id}/`, {
       method: "PATCH",

@@ -26,8 +26,8 @@ export default function CompletedTasks() {
     <div className="flex flex-col justify-center items-center p-4 font-[family-name:var(--font-geist-sans)]">
       <h1 className="w-1/2 text-3xl mb-5 font-black">All Tasks</h1>
       <div className="w-full flex flex-col justify-center items-center gap-3">
-        {tasks.map((task, index) => (
-          <TaskBox key={index} task={task} />
+        {tasks.map((task) => (
+          <TaskBox key={task.id} task={task} />
         ))}
       </div>
     </div>
