@@ -25,7 +25,7 @@ export default function Home() {
     };
 
     loadTasks();
-  }, []);
+  });
 
   useEffect(() => {
     let updatedTasks = [...tasks];

@@ -41,7 +41,7 @@ export default function NewTask() {
     }
 
     loadCategories();
-  }, []);
+  });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

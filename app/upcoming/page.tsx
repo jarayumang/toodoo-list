@@ -24,7 +24,7 @@ export default function UpcomingTask() {
     };
 
     loadTasks();
-  }, []);
+  });
 
   return (
     <div className="flex flex-col justify-center items-center p-4 font-[family-name:var(--font-geist-sans)]">
