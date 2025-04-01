@@ -29,6 +29,7 @@ const TaskBox: React.FC<TaskBoxProps> = ({ task }) => {
       await deleteTask(task.id);
       console.log("Task deleted successfully");
       setIsDeleteOpen(false);
+      setIsDetailsOpen(false);
     } catch (error) {
       console.error("Error deleting task:", error);
     }
@@ -159,19 +160,13 @@ const TaskBox: React.FC<TaskBoxProps> = ({ task }) => {
               </button>
               <button
                 className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleSaveClick;
-                }}
+                onClick={handleSaveClick}
               >
                 Save
               </button>
               <button
                 className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteClick;
-                }}
+                onClick={handleDeleteClick}
               >
                 Delete
               </button>
@@ -197,10 +192,7 @@ const TaskBox: React.FC<TaskBoxProps> = ({ task }) => {
               </button>
               <button
                 className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteClick;
-                }}
+                onClick={handleDeleteClick}
               >
                 Delete
               </button>

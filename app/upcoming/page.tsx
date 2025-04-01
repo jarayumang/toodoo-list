@@ -11,15 +11,15 @@ export default function UpcomingTask() {
   useEffect(() => {
     const loadTasks = async () => {
       try {
-        const data = await fetchTasks("/tasks/");
-        const filteredTasks = data.filter((task: Task) => {
-          const dueDate = task.due_date ? new Date(task.due_date) : null;
-          const today = new Date();
-          return dueDate && dueDate > today;
-        });
-        setTasks(filteredTasks);
+      const data = await fetchTasks("/tasks/");
+      const filteredTasks = data.filter((task: Task) => {
+        const dueDate = task.due_date ? new Date(task.due_date) : null;
+        const today = new Date();
+        return dueDate && dueDate > today && !task.completed;
+      });
+      setTasks(filteredTasks);
       } catch (error) {
-        console.error("Error fetching tasks:", error);
+      console.error("Error fetching tasks:", error);
       }
     };
 
